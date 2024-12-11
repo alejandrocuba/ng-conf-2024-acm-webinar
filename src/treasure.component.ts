@@ -1,34 +1,35 @@
 import {Component, inject, Input} from '@angular/core';
 import {Treasure, TreasureContents} from "./treasure.model";
-import {NgForOf, NgIf} from "@angular/common";
+
 import {TreasureContentsApiService} from "./treasure-contents-api.service";
 import {lastValueFrom} from "rxjs";
 
 @Component({
     selector: 'treasure',
     standalone: true,
-    imports: [
-        NgIf,
-        NgForOf
-    ],
+    imports: [],
     template: `
         <article>
-            <header>
-                <h1>{{ treasure.name }}</h1>
-            </header>
-            <img [src]="treasure.image" alt="{{ treasure.name }}" width="400" height="400">
-            <p *ngIf="areDetailsVisible">{{ treasure.description }}</p>
-            <footer>
-                <button (click)="onToggleDetails()">Toggle Details</button>
-                <ng-container *ngIf="contents">
-                    <h2>Contents</h2>
-                    <p *ngFor="let content of contents">
-                        Packet of {{ content.name }} with a value {{ content.value }}
-                    </p>
-                </ng-container>
-            </footer>
+          <header>
+            <h1>{{ treasure.name }}</h1>
+          </header>
+          <img [src]="treasure.image" alt="{{ treasure.name }}" width="400" height="400">
+          @if (areDetailsVisible) {
+            <p>{{ treasure.description }}</p>
+          }
+          <footer>
+            <button (click)="onToggleDetails()">Toggle Details</button>
+            @if (contents) {
+              <h2>Contents</h2>
+              @for (content of contents; track content) {
+                <p>
+                  Packet of {{ content.name }} with a value {{ content.value }}
+                </p>
+              }
+            }
+          </footer>
         </article>
-    `,
+        `,
     styles: ``
 })
 export class TreasureComponent {
