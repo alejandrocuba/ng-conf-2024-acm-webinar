@@ -6,7 +6,6 @@ import {lastValueFrom} from "rxjs";
 
 @Component({
     selector: 'treasure',
-    standalone: true,
     imports: [],
     template: `
         <article>
