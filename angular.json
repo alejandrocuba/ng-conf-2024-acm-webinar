@@ -22,7 +22,10 @@
               "namedChunks": false,
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false
+              "sourceMap": false,
+              "security": {
+                "autoCsp": true
+              }
             }
           },
           "options": {
